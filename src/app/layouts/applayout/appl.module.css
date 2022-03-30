@@ -1,0 +1,6 @@
+.comp {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}

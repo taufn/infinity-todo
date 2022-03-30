@@ -1,0 +1,18 @@
+.comp {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.margin-top {
+  margin-top: 0.5em;
+}
+
+.margin-bottom {
+  margin-bottom: 1em;
+}
+
+.fine-print {
+  font-size: 0.875em;
+  color: #546e7a;
+}

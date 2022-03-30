@@ -1,0 +1,57 @@
+:root {
+   --white:        #FFFFFF;
+   --light-blue-50:#E1F5FE;
+   --grey-100:     #F5F5F5;
+   --blue-grey-50: #ECEFF1;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+.text-center  { text-align: center; }
+.text-left    { text-align: left; }
+.text-right   { text-align: right; }
+.text-justify { text-align: justify; }
+
+
+/* ==========================================================================
+   Palette
+   ========================================================================== */
+
+.bg-white         { background-color: var(--white); }
+.bg-light-blue-50 { background-color: var(--light-blue-50); }
+.bg-grey-100      { background-color: var(--grey-100); }
+.bg-blue-grey-50  { background-color: var(--blue-grey-50); }
+
+
+/* ==========================================================================
+   Depths
+   ========================================================================== */
+
+.shadow-shallow {
+  box-shadow:
+   0 0 0.5em 0.125em rgb(38 50 56 / 1%),
+   0 0 1em rgb(38 50 56 / 1%);
+}
+
+.shadow-medium {
+  box-shadow:
+   0 0 3em 0.625em rgb(38 50 56 / 10%),
+   0 0 4em rgb(38 50 56 / 5%);
+}
+
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+.clearfix::before,
+.clearfix::after {
+  content: " ";
+  display: table;
+}
+
+.clearfix::after { clear: both; }
+.float-left { float: left; }
+.float-right { float: right; }

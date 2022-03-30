@@ -1,0 +1,10 @@
+node_modules/
+playgrounds/
+**/*/migrations
+public/
+build/
+dist/
+/assets
+
+# configurations
+vite.config.ts

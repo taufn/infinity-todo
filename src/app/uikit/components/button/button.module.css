@@ -1,0 +1,55 @@
+.comp {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: #03a9f4;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.comp:hover,
+.comp:focus {
+  background-color: #0288d1;
+}
+
+/* style and size */
+
+.secondary {
+  color: #03a9f4;
+  background-color: transparent;
+}
+
+.secondary:hover,
+.secondary:focus {
+  background-color: #e1f5fe;
+}
+
+.bordered {
+  padding: 0.375em 0.875em;
+  border: 0.125em solid #0288d1;
+}
+
+.bordered.secondary {
+  border-color: #03a9f4;
+}
+
+.disabled,
+.disabled:hover,
+.disabled:focus {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* modifier */
+
+.big {
+  font-size: 1.25em;
+}
+
+.expanded {
+  width: 100%;
+  display: block;
+}

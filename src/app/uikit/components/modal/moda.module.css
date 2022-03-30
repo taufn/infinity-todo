@@ -1,0 +1,36 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 10vh;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modal {
+  width: 90vw;
+  max-width: 40em;
+  max-height: 75vh;
+  position: relative;
+  z-index: 2;
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+
+.background {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(38, 50, 56, 0.8);
+}
+
+.bg-transparent {
+  background-color: transparent;
+}

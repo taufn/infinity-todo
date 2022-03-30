@@ -1,0 +1,38 @@
+.comp {
+  padding: 0.4375em;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: #ffffff;
+  border: 0.0625em solid #cfd8dc;
+  border-radius: 0.25em;
+}
+
+.comp:focus {
+  padding: 0.375em;
+  background-color: #f2fbff;
+  border: 0.125em solid #81d4fa;
+  outline: none;
+}
+
+.comp::placeholder {
+  color: #b0bec5;
+}
+.comp::-ms-input-placeholder,
+.comp::-webkit-input-placeholder {
+  color: #b0bec5;
+}
+
+.flat {
+  padding-left: 0;
+  padding-right: 0;
+  border-bottom-color: #ffffff;
+}
+
+.flat:focus {
+  border-bottom-color: #ffffff;
+}
+
+.expanded {
+  width: 100%;
+  display: block;
+}

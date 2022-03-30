@@ -1,0 +1,14 @@
+.comp {
+  max-width: 40em;
+  padding: 1em;
+  overflow: auto;
+  border-radius: 0.25em;
+}
+
+.expanded {
+  max-width: 100vw;
+}
+
+.no-space {
+  padding: 0;
+}
