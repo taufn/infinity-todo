@@ -1,0 +1,86 @@
+.comp {
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.input {
+  width: 1.5em;
+  padding: 0.625em 0 0 0.5em;
+}
+
+.input input {
+  cursor: pointer;
+}
+
+.summary {
+  width: calc(100% - 1.5em - 7.5em);
+  padding: 0.625em 0.5em 0.5625em;
+}
+
+.summary p {
+  display: inline;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 0.875em;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.cta {
+  width: 7.5em;
+}
+
+.cta > button {
+  width: 2.5em;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.cta > button span {
+  display: block;
+}
+
+.icon-up {
+  transform: rotate(-90deg);
+}
+
+.icon-down {
+  transform: rotate(90deg);
+}
+
+.icon-erase {
+  transform: rotate(45deg);
+}
+
+@media screen and (min-width: 60.0625rem) {
+  .comp:hover,
+  .comp:focus {
+    background-color: #F5F5F5;
+  }
+
+  .cta {
+    display: none;
+  }
+
+  .comp:hover .cta,
+  .comp:focus .cta {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 60rem) {
+  .summary {
+    width: calc(100% - 1.5em - 6em);
+  }
+
+  .cta {
+    width: 6em;
+    display: block;
+  }
+
+  .cta > button {
+    width: 2em;
+  }
+}

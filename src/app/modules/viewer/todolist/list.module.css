@@ -1,0 +1,9 @@
+.comp {
+  margin-top: 1em;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

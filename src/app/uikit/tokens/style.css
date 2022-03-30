@@ -1,6 +1,7 @@
 :root {
    --white:        #FFFFFF;
    --light-blue-50:#E1F5FE;
+   --grey-50:      #FAFAFA;
    --grey-100:     #F5F5F5;
    --blue-grey-50: #ECEFF1;
 }
@@ -21,6 +22,7 @@
 
 .bg-white         { background-color: var(--white); }
 .bg-light-blue-50 { background-color: var(--light-blue-50); }
+.bg-grey-50       { background-color: var(--grey-50 ); }
 .bg-grey-100      { background-color: var(--grey-100); }
 .bg-blue-grey-50  { background-color: var(--blue-grey-50); }
 

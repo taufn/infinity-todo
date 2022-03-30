@@ -8,6 +8,7 @@ export const UITypography = {
 export const UIColors = {
   bgWhite: "bg-white",
   bgLightBlue50: "bg-light-blue-50",
+  bgGrey50: "bg-grey-50",
   bgGrey100: "bg-grey-100",
   bgBlueGrey50: "bg-blue-grey-50",
 };
