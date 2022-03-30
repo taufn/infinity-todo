@@ -1,17 +1,9 @@
 import React from "react";
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { routeNames, routes } from "./routeNames";
 import InfinityApp from "~/app/Infinity";
 import { HomePage } from "~/app/pages";
-
-const RouteOutlet: React.FC = () => {
-  return (
-    <React.Fragment>
-      <Outlet />
-    </React.Fragment>
-  );
-};
 
 const Routing: React.FC = () => {
   return (

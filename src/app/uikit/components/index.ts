@@ -2,6 +2,8 @@ export * from "./basepage";
 export * from "./button";
 export * from "./card";
 export * from "./container";
+export * from "./formfield";
 export * from "./input";
+export * from "./label";
 export * from "./modal";
 export * from "./text";

@@ -1,13 +1,16 @@
 import React from "react";
 
 import { AppLayout } from "~/app/layouts";
+import { CreateTodoInput } from "~/app/modules/editor";
 import { Container } from "~/app/uikit/components";
 
 const HomePage: React.FC = () => {
   return (
     <>
       <AppLayout>
-        <Container>Homepage</Container>
+        <Container>
+          <CreateTodoInput />
+        </Container>
       </AppLayout>
     </>
   );
