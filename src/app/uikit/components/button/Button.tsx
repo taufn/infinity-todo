@@ -3,12 +3,11 @@ import React from "react";
 
 import styles from "./button.module.css";
 
-type ButtonSize = "big";
 export type ButtonModifierProps = {
   secondary?: boolean;
   bordered?: boolean;
   expanded?: boolean;
-  size?: ButtonSize;
+  squared?: boolean;
 };
 export type ButtonProps = ButtonModifierProps &
   React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
@@ -19,20 +18,21 @@ const Button: React.FC<ButtonProps> = ({
   expanded,
   onClick,
   secondary,
-  size,
+  squared,
   type,
   ...props
 }) => {
   const classes = classNames(
     styles.comp,
-    // style
     {
+      // style
       [styles.secondary]: secondary,
       [styles.bordered]: bordered,
       [styles.disabled]: props.disabled,
+      // modifier
+      [styles.expanded]: expanded && !squared,
+      [styles.squared]: !expanded && squared,
     },
-    // modifier
-    { [styles.expanded]: expanded, [styles.big]: size === "big" },
     className,
   );
 

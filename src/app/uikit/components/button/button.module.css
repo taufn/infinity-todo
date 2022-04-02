@@ -1,11 +1,11 @@
 .comp {
   padding: 0.5em 1em;
-  font-size: 1em;
-  line-height: 1.5;
+  font-size: 0.875em;
+  line-height: 1.5714285714;
   color: #ffffff;
   background-color: #03a9f4;
   border: none;
-  border-radius: 0.25em;
+  border-radius: 0.2857142857em;
   cursor: pointer;
   transition: all 120ms ease;
 }
@@ -28,8 +28,8 @@
 }
 
 .bordered {
-  padding: 0.375em 0.875em;
-  border: 0.125em solid #0288d1;
+  padding: 0.3571428571em 0.8571428571em;
+  border: 0.1428571429em solid #0288d1;
 }
 
 .bordered.secondary {
@@ -44,12 +44,12 @@
 }
 
 /* modifier */
-
-.big {
-  font-size: 1.25em;
-}
-
 .expanded {
   width: 100%;
   display: block;
+}
+
+.squared {
+  width: 2.5714285714em;
+  padding: 0.5em 0.1428571429em;
 }

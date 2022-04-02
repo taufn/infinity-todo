@@ -1,16 +1,16 @@
 .comp {
-  padding: 0.4375em;
-  font-size: 1rem;
-  line-height: 1.5;
+  padding: 0.4285714286em 0.5em;
+  font-size: 0.875rem;
+  line-height: 1.5714285714;
   background-color: #ffffff;
-  border: 0.0625em solid #cfd8dc;
-  border-radius: 0.25em;
+  border: 0.07142857143em solid #cfd8dc;
+  border-radius: 0.2857142857em;
 }
 
 .comp:focus {
-  padding: 0.375em;
+  padding: 0.3571428571em 0.4285714286em;
   background-color: #f2fbff;
-  border: 0.125em solid #81d4fa;
+  border: 0.1428571429em solid #81d4fa;
   outline: none;
 }
 

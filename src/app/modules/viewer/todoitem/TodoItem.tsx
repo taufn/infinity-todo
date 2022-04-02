@@ -47,13 +47,13 @@ const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
             <Text trim="top bottom">{item.summary}</Text>
           </div>
           <div className={classNames(UIUtilities.floatRight, styles.cta)}>
-            <Button secondary onClick={handleAction()}>
+            <Button secondary squared onClick={handleAction()}>
               <span className={styles["icon-up"]}>&#x27A4;</span>
             </Button>
-            <Button secondary onClick={handleAction()}>
+            <Button secondary squared onClick={handleAction()}>
               <span className={styles["icon-down"]}>&#x27A4;</span>
             </Button>
-            <Button secondary onClick={handleAction()}>
+            <Button secondary squared onClick={handleAction()}>
               <span className={styles["icon-erase"]}>&#10010;</span>
             </Button>
           </div>

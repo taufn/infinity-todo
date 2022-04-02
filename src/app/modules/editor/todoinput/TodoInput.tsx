@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./todo.module.css";
+import styles from "./tinp.module.css";
 import { Button, FormField, Input } from "~/app/uikit/components";
 import hooks from "~/libs/hooks";
 
