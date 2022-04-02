@@ -22,7 +22,13 @@ const CreateTodoInput: React.FC = () => {
 
   return (
     <Card>
-      <TodoInput onSubmit={handleCreateTodo} onChange={setItem} item={item} isLoading={isLoading} />
+      <TodoInput
+        formType="create"
+        onSubmit={handleCreateTodo}
+        onChange={setItem}
+        item={item}
+        isLoading={isLoading}
+      />
     </Card>
   );
 };

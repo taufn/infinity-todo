@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 
@@ -20,4 +21,9 @@ module.exports = {
     "^.+\\.(t|j)sx$": "ts-jest",
   },
   verbose: true,
+  globals: {
+    window: {
+      setTimeout: (handler, timeout) => undefined,
+    },
+  },
 };
