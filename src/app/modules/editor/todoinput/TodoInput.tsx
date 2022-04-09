@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./tinp.module.css";
 import { Button, FormField, Input } from "~/app/uikit/components";
-import hooks from "~/libs/hooks";
+import hof from "~/libs/hof";
 
 type TodoInputProps = {
   formType: "create" | "update";
@@ -34,7 +34,7 @@ const TodoInput: React.FC<TodoInputProps> = ({
     }
   };
 
-  const withTimeout = (fn: () => void) => () => hooks.useTimeout(fn, 100);
+  const withTimeout = (fn: () => void) => () => hof.useTimeout(fn, 100);
 
   React.useEffect(() => {
     if (formTypeIsUpdate && typeof onBlur === "function" && !inputFocus && !buttonFocus) {

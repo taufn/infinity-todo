@@ -1,9 +1,9 @@
-import hooks from "../hooks";
+import hof from "../hof";
 
-describe("libs/hooks", () => {
+describe("libs/hof", () => {
   describe("useTimeout", () => {
     it("should be defined", () => {
-      expect(typeof hooks.useTimeout).toBe("function");
+      expect(typeof hof.useTimeout).toBe("function");
     });
 
     it("should execute the function with a default delay time", () => {
@@ -12,7 +12,7 @@ describe("libs/hooks", () => {
       jest.useFakeTimers();
       jest.spyOn(window, "setTimeout");
 
-      hooks.useTimeout(testFn);
+      hof.useTimeout(testFn);
       // no immediate call
       expect(testFn).not.toBeCalled();
       expect(window.setTimeout).toBeCalledWith(expect.any(Function), 200);
@@ -27,7 +27,7 @@ describe("libs/hooks", () => {
       jest.useFakeTimers();
       jest.spyOn(window, "setTimeout");
 
-      hooks.useTimeout(testFn, delay);
+      hof.useTimeout(testFn, delay);
       // no immediate call
       expect(testFn).not.toBeCalled();
       expect(window.setTimeout).toBeCalledWith(expect.any(Function), delay);

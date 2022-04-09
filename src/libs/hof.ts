@@ -1,4 +1,4 @@
-const hooks = {
+const hof = {
   useTimeout: (fn: () => void, ms: number = 200) => {
     const timer = window.setTimeout(() => {
       window.clearTimeout(timer);
@@ -7,4 +7,4 @@ const hooks = {
   },
 };
 
-export default hooks;
+export default hof;
