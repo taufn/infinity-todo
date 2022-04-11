@@ -1,3 +1,4 @@
+import { TodoRepo } from "../core/contracts";
 import { createTodoRepoLocalStorage } from "./todoRepoLocalStorage";
 
-export const todoRepo = createTodoRepoLocalStorage(window.localStorage);
+export const todoRepo: TodoRepo = createTodoRepoLocalStorage(window.localStorage);

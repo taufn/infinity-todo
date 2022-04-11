@@ -6,8 +6,10 @@ import { todoRepo } from "~/app/repositories";
 
 type FetchTodoList = FetcherResult<TodoItem[]>;
 
+export const TODO_LIST_KEY = "todoRepo.getTodoList";
+
 export function useTodoList(): FetchTodoList {
-  const { data, error } = useSWR("todoRepo.getTodoList", todoRepo.getTodoList);
+  const { data, error } = useSWR(TODO_LIST_KEY, todoRepo.getTodoList);
 
   if (typeof error !== "undefined") {
     return {

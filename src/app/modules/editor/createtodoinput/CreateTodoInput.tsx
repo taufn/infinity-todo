@@ -1,24 +1,23 @@
 import React from "react";
+import { useSWRConfig } from "swr";
 
 import { TodoInput } from "../todoinput";
+import { TODO_LIST_KEY } from "~/app/core/hooks";
+import { todoRepo } from "~/app/repositories";
 import { Card } from "~/app/uikit/components";
 
 const CreateTodoInput: React.FC = () => {
   const [item, setItem] = React.useState<string>("");
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { mutate } = useSWRConfig();
 
-  const handleCreateTodo = () => {
+  const handleCreateTodo = React.useCallback(async () => {
     setIsLoading(true);
-
-    const emulator = window.setTimeout(() => {
-      window.clearTimeout(emulator);
-      // TODO: remove console.log
-      // eslint-disable-next-line no-console
-      console.log(item);
-      setIsLoading(false);
-      setItem("");
-    }, 2e3);
-  };
+    await todoRepo.addTodoItem(item);
+    setIsLoading(false);
+    setItem("");
+    mutate(TODO_LIST_KEY, () => todoRepo.getTodoList());
+  }, [item, setIsLoading, setItem, mutate]);
 
   return (
     <Card>

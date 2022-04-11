@@ -14,4 +14,5 @@ export type TodoItem = {
 
 export interface TodoRepo {
   getTodoList(): Promise<TodoItem[]>;
+  addTodoItem(summary: string): Promise<TodoItem>;
 }
