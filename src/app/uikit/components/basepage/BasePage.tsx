@@ -11,7 +11,7 @@ type BasePageProps = {
 
 const BasePage: React.FC<BasePageProps> = ({ children, className, title }) => {
   const classes: string = classNames(styles.comp, className);
-  let pageTitle = "Rekod";
+  let pageTitle = "Infinity";
 
   if (typeof title === "string" && title.length > 0) {
     pageTitle += ` - ${title}`;
