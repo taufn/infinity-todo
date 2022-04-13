@@ -4,10 +4,12 @@ import { useSWRConfig } from "swr";
 
 import { UpdateTodoInput } from "../../editor";
 import { ViewTodoItem } from "../models";
+import { TodoStateButton } from "../todostatebutton";
 import styles from "./item.module.css";
+import { TodoState } from "~/app/core/contracts";
 import { TODO_LIST_KEY } from "~/app/core/hooks";
 import { todoRepo } from "~/app/repositories";
-import { Button, Checkbox, Text } from "~/app/uikit/components";
+import { Button, Text } from "~/app/uikit/components";
 import { UIUtilities } from "~/app/uikit/tokens";
 
 type TodoItemProps = {
@@ -46,10 +48,12 @@ const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
       ) : (
         <>
           <div className={classNames(UIUtilities.floatLeft, styles.input)}>
-            <Checkbox />
+            <TodoStateButton itemID={item.id} state={item.state} />
           </div>
           <div
-            className={classNames(UIUtilities.floatLeft, styles.summary)}
+            className={classNames(UIUtilities.floatLeft, styles.summary, {
+              [styles["summary-done"]]: item.state === TodoState.Done,
+            })}
             onClick={() => setIsEdit(true)}
           >
             <Text trim="top bottom">{item.summary}</Text>
