@@ -25,7 +25,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ item }) => {
         e.stopPropagation();
 
         if (action === "remove") {
-          //
+          await todoRepo.removeTodoItem(item.id);
         } else {
           await todoRepo.moveTodoItem(item.id, action === "move_up" ? "up" : "down");
         }

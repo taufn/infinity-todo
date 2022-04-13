@@ -18,4 +18,5 @@ export interface TodoRepo {
   addTodoItem(summary: string): Promise<TodoItem>;
   editTodoItem(id: string, params: EditTodoItemParams): Promise<void>;
   moveTodoItem(id: string, direction: "up" | "down"): Promise<void>;
+  removeTodoItem(id: string): Promise<void>;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { mock } from "jest-mock-extended";
 
 import { createTodoRepoLocalStorage, parseAndValidateStorageData } from "../todoRepoLocalStorage";
@@ -17,6 +18,7 @@ describe("app/repositories/todoRepoLocalStorage", () => {
       expect(typeof todoRepo.addTodoItem).toBe("function");
       expect(typeof todoRepo.editTodoItem).toBe("function");
       expect(typeof todoRepo.moveTodoItem).toBe("function");
+      expect(typeof todoRepo.removeTodoItem).toBe("function");
     });
   });
 
@@ -289,6 +291,51 @@ describe("app/repositories/todoRepoLocalStorage", () => {
         expect(stubTodoList[0].id).toBe("item1");
         expect(stubTodoList[1].id).toBe("item2");
         expect(stubTodoList[2].id).toBe("item3");
+      });
+    });
+
+    describe("removeTodoItem()", () => {
+      it("should throw when given id is not found", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+
+        mockStorage.getItem.mockReturnValue("[]");
+        await expect(todoRepo.removeTodoItem("anid")).rejects.toThrow(/not found/gi);
+      });
+
+      it("should remove the item when id matches", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+        let stubTodoList: TodoItem[] = [
+          {
+            id: "item1",
+            state: TodoState.Open,
+            summary: "first item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+          {
+            id: "item2",
+            state: TodoState.Open,
+            summary: "second item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+          {
+            id: "item3",
+            state: TodoState.Open,
+            summary: "third item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+        ];
+
+        mockStorage.getItem.mockReturnValue(JSON.stringify(stubTodoList));
+        mockStorage.setItem.mockImplementation((_, v) => (stubTodoList = JSON.parse(v)));
+
+        const originalLength = stubTodoList.length;
+        await expect(todoRepo.removeTodoItem("item2")).resolves.not.toThrow();
+        expect(originalLength - stubTodoList.length).toBe(1);
       });
     });
   });

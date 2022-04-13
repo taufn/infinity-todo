@@ -80,6 +80,8 @@ export function createTodoRepoLocalStorage(storage: Storage): TodoRepo {
       const todoList = await this.getTodoList();
       const todoItem = todoList.find(item => item.id === id);
       if (typeof todoItem === "undefined") {
+        // TODO: refactor errors
+        // eslint-disable-next-line sonarjs/no-duplicate-string
         throw new Error("Todo item is not found");
       }
 
@@ -124,6 +126,17 @@ export function createTodoRepoLocalStorage(storage: Storage): TodoRepo {
 
         return item;
       });
+      storage.setItem(todoListKey, JSON.stringify(updatedTodoList));
+    },
+
+    async removeTodoItem(id: string): Promise<void> {
+      const todoList = await this.getTodoList();
+      const updatedTodoList = todoList.filter(item => item.id !== id);
+
+      if (updatedTodoList.length === todoList.length) {
+        throw new Error("Todo item is not found");
+      }
+
       storage.setItem(todoListKey, JSON.stringify(updatedTodoList));
     },
   };
