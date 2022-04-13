@@ -1,7 +1,11 @@
 {
-  "name": "infinity-todo",
+  "name": "@taufn/infinity-todo",
   "version": "0.0.0",
   "license": "MIT",
+  "author": {
+    "email": "hello.taufanarsyad@gmail.com",
+    "name": "Taufan"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
