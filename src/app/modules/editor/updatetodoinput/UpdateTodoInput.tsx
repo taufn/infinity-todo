@@ -1,6 +1,9 @@
 import React from "react";
+import { useSWRConfig } from "swr";
 
 import { TodoInput } from "../todoinput";
+import { TODO_LIST_KEY } from "~/app/core/hooks";
+import { todoRepo } from "~/app/repositories";
 
 type UpdateTodoInputProps = {
   currentID: string;
@@ -9,19 +12,27 @@ type UpdateTodoInputProps = {
   onAbort: () => void;
 };
 
-const UpdateTodoInput: React.FC<UpdateTodoInputProps> = ({ currentValue, onAbort, onSubmit }) => {
+const UpdateTodoInput: React.FC<UpdateTodoInputProps> = ({
+  currentID,
+  currentValue,
+  onAbort,
+  onSubmit,
+}) => {
   const [item, setItem] = React.useState<string>(currentValue);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { mutate } = useSWRConfig();
 
-  const handleUpdateTodo = () => {
+  const handleUpdateTodo = React.useCallback(async () => {
+    if (item === "currentValue") {
+      return;
+    }
+
     setIsLoading(true);
-
-    const emulator = window.setTimeout(() => {
-      window.clearTimeout(emulator);
-      onSubmit(item);
-      setIsLoading(false);
-    }, 2e3);
-  };
+    await todoRepo.editTodoItem(currentID, { summary: item });
+    setIsLoading(false);
+    onSubmit(item);
+    mutate(TODO_LIST_KEY, () => todoRepo.getTodoList());
+  }, [item, setIsLoading, onSubmit, mutate]);
 
   return (
     <TodoInput

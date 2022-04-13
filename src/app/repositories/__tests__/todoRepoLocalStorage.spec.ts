@@ -15,6 +15,8 @@ describe("app/repositories/todoRepoLocalStorage", () => {
 
       expect(typeof todoRepo.getTodoList).toBe("function");
       expect(typeof todoRepo.addTodoItem).toBe("function");
+      expect(typeof todoRepo.editTodoItem).toBe("function");
+      expect(typeof todoRepo.moveTodoItem).toBe("function");
     });
   });
 
@@ -127,6 +129,166 @@ describe("app/repositories/todoRepoLocalStorage", () => {
         expect(result.state).toBe(TodoState.Open);
         expect(result.createdAt instanceof Date).toBe(true);
         expect(result.updatedAt).toBeNull();
+      });
+    });
+
+    describe("editTodoItem()", () => {
+      it("should throw error if given params are empty", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+        await expect(todoRepo.editTodoItem("itemid", {})).rejects.toThrow(/empty/gi);
+      });
+
+      it("should validate given state", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+        await expect(todoRepo.editTodoItem("itemid", { state: "invalid" as any })).rejects.toThrow(
+          /state/gi,
+        );
+      });
+
+      it("should validate given summary", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+        await expect(
+          todoRepo.editTodoItem("itemid", { state: TodoState.Ongoing, summary: "" }),
+        ).rejects.toThrow(/summary/gi);
+      });
+
+      it("should throw error if given id is not found", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+
+        mockStorage.getItem.mockReturnValue("[]");
+        await expect(todoRepo.editTodoItem("itemid", { state: TodoState.Done })).rejects.toThrow(
+          /not found/gi,
+        );
+        expect(mockStorage.getItem).toBeCalledTimes(1);
+      });
+
+      it("should update the item when all is good", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+        const stubTodoItem: TodoItem = {
+          id: "itemid",
+          state: TodoState.Open,
+          summary: "item summary",
+          createdAt: new Date(),
+          updatedAt: null,
+        };
+        const paramSummary = "another summary";
+
+        mockStorage.getItem.mockReturnValue(JSON.stringify([stubTodoItem]));
+        await expect(
+          todoRepo.editTodoItem(stubTodoItem.id, { summary: paramSummary }),
+        ).resolves.toBeUndefined();
+        const [paramTodoItem]: TodoItem[] = parseAndValidateStorageData(
+          mockStorage.setItem.mock.calls[0][1],
+        );
+        expect(paramTodoItem.id).toBe(stubTodoItem.id);
+        expect(paramTodoItem.summary).toBe(paramSummary);
+      });
+    });
+
+    describe("moveTodoItem()", () => {
+      it("should validate the direction params", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+
+        mockStorage.getItem.mockReturnValue("[]");
+        await expect(todoRepo.moveTodoItem("anid", "move" as any)).rejects.toThrow(/direction/gi);
+      });
+
+      it("should throw when given id is not found", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+
+        mockStorage.getItem.mockReturnValue("[]");
+        await expect(todoRepo.moveTodoItem("anid", "down")).rejects.toThrow(/not found/gi);
+      });
+
+      it("should move the item as per given direction", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+        let stubTodoList: TodoItem[] = [
+          {
+            id: "item1",
+            state: TodoState.Open,
+            summary: "first item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+          {
+            id: "item2",
+            state: TodoState.Open,
+            summary: "second item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+          {
+            id: "item3",
+            state: TodoState.Open,
+            summary: "third item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+        ];
+
+        mockStorage.setItem.mockImplementation((_, v) => {
+          stubTodoList = JSON.parse(v);
+        });
+        mockStorage.getItem.mockImplementation(() => JSON.stringify(stubTodoList));
+
+        await expect(todoRepo.moveTodoItem("item2", "up")).resolves.not.toThrow();
+        expect(stubTodoList[0].id).toBe("item2");
+        expect(stubTodoList[1].id).toBe("item1");
+        expect(stubTodoList[2].id).toBe("item3");
+
+        await expect(todoRepo.moveTodoItem("item1", "down")).resolves.not.toThrow();
+        expect(stubTodoList[0].id).toBe("item2");
+        expect(stubTodoList[1].id).toBe("item3");
+        expect(stubTodoList[2].id).toBe("item1");
+      });
+
+      it("should not move the item when already at the top or bottom of todo list", async () => {
+        const mockStorage = mock<Storage>();
+        const todoRepo = createTodoRepoLocalStorage(mockStorage);
+        let stubTodoList: TodoItem[] = [
+          {
+            id: "item1",
+            state: TodoState.Open,
+            summary: "first item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+          {
+            id: "item2",
+            state: TodoState.Open,
+            summary: "second item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+          {
+            id: "item3",
+            state: TodoState.Open,
+            summary: "third item",
+            createdAt: new Date(),
+            updatedAt: null,
+          },
+        ];
+
+        mockStorage.getItem.mockReturnValue(JSON.stringify(stubTodoList));
+        mockStorage.setItem.mockImplementation((_, v) => (stubTodoList = JSON.parse(v)));
+
+        await expect(todoRepo.moveTodoItem("item1", "up")).resolves.not.toThrow();
+        expect(stubTodoList[0].id).toBe("item1");
+        expect(stubTodoList[1].id).toBe("item2");
+        expect(stubTodoList[2].id).toBe("item3");
+
+        await expect(todoRepo.moveTodoItem("item3", "down")).resolves.not.toThrow();
+        expect(stubTodoList[0].id).toBe("item1");
+        expect(stubTodoList[1].id).toBe("item2");
+        expect(stubTodoList[2].id).toBe("item3");
       });
     });
   });

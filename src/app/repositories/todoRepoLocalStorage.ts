@@ -1,4 +1,4 @@
-import { TodoItem, TodoRepo, TodoState } from "../core/contracts";
+import { EditTodoItemParams, TodoItem, TodoRepo, TodoState } from "../core/contracts";
 
 export function parseAndValidateStorageData(storageData: string): TodoItem[] {
   let result: any[] = [];
@@ -57,6 +57,74 @@ export function createTodoRepoLocalStorage(storage: Storage): TodoRepo {
       todoList.unshift(newItem);
       storage.setItem(todoListKey, JSON.stringify(todoList));
       return newItem;
+    },
+
+    async editTodoItem(id: string, params: EditTodoItemParams): Promise<void> {
+      if (typeof params.state === "undefined" && typeof params.summary !== "string") {
+        throw new Error("Params cannot be empty");
+      }
+
+      if (
+        typeof params.state !== "undefined" &&
+        params.state !== TodoState.Open &&
+        params.state !== TodoState.Ongoing &&
+        params.state !== TodoState.Done
+      ) {
+        throw new Error("Param state is invalid");
+      }
+
+      if (typeof params.summary === "string" && params.summary === "") {
+        throw new Error("Param summary is invalid");
+      }
+
+      const todoList = await this.getTodoList();
+      const todoItem = todoList.find(item => item.id === id);
+      if (typeof todoItem === "undefined") {
+        throw new Error("Todo item is not found");
+      }
+
+      todoItem.state = params.state ?? todoItem.state;
+      todoItem.summary = params.summary ?? todoItem.summary;
+      const updatedTodoList = todoList.map(item =>
+        item.id === id ? { ...todoItem } : { ...item },
+      );
+      storage.setItem(todoListKey, JSON.stringify(updatedTodoList));
+    },
+
+    async moveTodoItem(id: string, direction: "up" | "down"): Promise<void> {
+      if (direction !== "up" && direction !== "down") {
+        throw new Error("Direction should be `up` or `down`");
+      }
+
+      const todoList = await this.getTodoList();
+      const itemIndex = todoList.findIndex(item => item.id === id);
+      if (itemIndex < 0) {
+        throw new Error("Todo item is not found");
+      }
+
+      let indexToMove: number = -1;
+      if (direction === "up" && itemIndex > 0) {
+        indexToMove = itemIndex - 1;
+      } else if (direction === "down" && itemIndex < todoList.length - 1) {
+        indexToMove = itemIndex + 1;
+      } else {
+        return;
+      }
+
+      const todoItem = todoList.find(item => item.id === id);
+      const otherItemToMove = todoList[indexToMove];
+      const updatedTodoList = todoList.map((item, index) => {
+        if (index === indexToMove) {
+          return todoItem;
+        }
+
+        if (index === itemIndex) {
+          return otherItemToMove;
+        }
+
+        return item;
+      });
+      storage.setItem(todoListKey, JSON.stringify(updatedTodoList));
     },
   };
 }
