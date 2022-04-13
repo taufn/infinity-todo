@@ -17,6 +17,8 @@ const CreateTodoInput: React.FC = () => {
     setIsLoading(false);
     setItem("");
     mutate(TODO_LIST_KEY, () => todoRepo.getTodoList());
+    // TODO: rewrite this in react way
+    document.getElementById("todo-input-create")?.focus();
   }, [item, setIsLoading, setItem, mutate]);
 
   return (

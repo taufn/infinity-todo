@@ -2,6 +2,19 @@
   margin-top: 1em;
 }
 
+.card {
+  margin-bottom: 1em;
+}
+
+.card-open {
+  background: rgb(255, 247, 248);
+  background: linear-gradient(180deg, rgba(255, 247, 248, 1) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
+.card-done {
+  background-color: #FAFAFA;
+}
+
 .list {
   padding: 0;
   margin: 0;

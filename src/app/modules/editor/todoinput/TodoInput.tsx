@@ -25,6 +25,7 @@ const TodoInput: React.FC<TodoInputProps> = ({
   const label: string = formTypeIsUpdate ? "" : "Create Item";
   const [inputFocus, setInputFocus] = React.useState<boolean>(formTypeIsUpdate);
   const [buttonFocus, setButtonFocus] = React.useState<boolean>(false);
+  const inputID = `todo-input-${formType}`;
 
   const handleOnSubmit: React.FormEventHandler = e => {
     const canSubmit: boolean = typeof item === "string" || item !== "" || !isLoading;
@@ -46,11 +47,11 @@ const TodoInput: React.FC<TodoInputProps> = ({
     <form onSubmit={handleOnSubmit}>
       <div className={styles.comp}>
         <div className={styles.input}>
-          <FormField stripped htmlFor="todo-item" label={label}>
+          <FormField stripped htmlFor={inputID} label={label}>
             <Input
               expanded
               autoFocus
-              id="todo-item"
+              id={inputID}
               placeholder="Do something magical..."
               disabled={isLoading}
               value={item}

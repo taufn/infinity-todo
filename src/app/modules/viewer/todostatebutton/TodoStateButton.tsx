@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 import { useSWRConfig } from "swr";
 
@@ -48,7 +49,15 @@ const TodoStateButton: React.FC<TodoStateButtonProps> = ({ itemID, state }) => {
   );
 
   return (
-    <Button secondary expanded className={styles.comp} onClick={handleToggleState}>
+    <Button
+      secondary
+      expanded
+      className={classNames(styles.comp, {
+        [styles.open]: state === TodoState.Open,
+        [styles.done]: state === TodoState.Done,
+      })}
+      onClick={handleToggleState}
+    >
       {stateTranslation[state]}
     </Button>
   );
