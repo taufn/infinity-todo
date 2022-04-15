@@ -4,6 +4,10 @@
   overflow: auto;
   border-radius: 0.25em;
   background-color: #ffffff;
+  box-shadow:
+    0.125em 0.125em 0.125em 0.0625em rgb(0 0 0 / 6%),
+    0.375em 0.625em 0.75em 0.25em rgb(0 0 0 / 2%),
+    -0.125em -0.125em 0.375em 0 rgb(255 255 255 / 10%);
 }
 
 .expanded {
