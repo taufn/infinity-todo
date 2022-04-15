@@ -12,11 +12,15 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <AppLayout>
-        <Container className={styles.container}>
-          <CreateTodoInput />
-          {result.state === "success" && <TodoList items={result.data} />}
-        </Container>
+      <AppLayout className={styles.page}>
+        <div className={styles.input}>
+          <Container>
+            <CreateTodoInput />
+          </Container>
+        </div>
+        <div className={styles.list}>
+          <Container>{result.state === "success" && <TodoList items={result.data} />}</Container>
+        </div>
       </AppLayout>
     </>
   );

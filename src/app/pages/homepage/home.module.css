@@ -1,9 +1,17 @@
-.container {
-  padding-top: 1em;
+.page {
+  padding: 7.5625em 1em 1em;
 }
 
-@media screen and (max-width: 60rem) {
-  .container {
-    padding: 1em;
-  }
+.input {
+  width: 100%;
+  padding: 1em;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+}
+
+.list {
+  position: relative;
+  z-index: 1;
 }
