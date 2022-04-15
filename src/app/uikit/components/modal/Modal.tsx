@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { UIColors, UIDepths } from "../../tokens";
+import { UIDepths } from "../../tokens";
 import styles from "./moda.module.css";
 
 type ModalCloseTrigger = "button" | "overlay";
@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, noLayer, onTriggerClose
         className={classNames(styles.background, { [styles["bg-transparent"]]: noLayer })}
         onClick={handleTriggerClose("overlay")}
       />
-      <div className={classNames(styles.modal, UIColors.bgWhite, UIDepths.shadowMedium)}>
+      <div className={classNames(styles.modal, UIDepths.shadowMedium)}>
         <div>{children}</div>
       </div>
     </div>

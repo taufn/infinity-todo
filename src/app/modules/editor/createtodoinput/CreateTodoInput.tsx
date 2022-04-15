@@ -2,6 +2,7 @@ import React from "react";
 import { useSWRConfig } from "swr";
 
 import { TodoInput } from "../todoinput";
+import styles from "./crte.module.css";
 import { TODO_LIST_KEY } from "~/app/core/hooks";
 import { todoRepo } from "~/app/repositories";
 import { Card } from "~/app/uikit/components";
@@ -22,7 +23,7 @@ const CreateTodoInput: React.FC = () => {
   }, [item, setIsLoading, setItem, mutate]);
 
   return (
-    <Card>
+    <Card className={styles.comp}>
       <TodoInput
         formType="create"
         onSubmit={handleCreateTodo}

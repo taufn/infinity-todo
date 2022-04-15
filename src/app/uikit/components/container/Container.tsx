@@ -1,9 +1,14 @@
+import classNames from "classnames";
 import React from "react";
 
 import styles from "./cont.module.css";
 
-const Container: React.FC = ({ children }) => {
-  return <div className={styles.comp}>{children}</div>;
+type ContainerProps = {
+  className?: string;
+};
+
+const Container: React.FC<ContainerProps> = ({ children, className }) => {
+  return <div className={classNames(styles.comp, className)}>{children}</div>;
 };
 
 export default Container;
