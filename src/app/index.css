@@ -12,7 +12,7 @@
    ========================================================================== */
 
 html {
-  color: #222;
+  color: #222222;
   font-size: 1em;
   line-height: 1.4;
 }
@@ -199,8 +199,8 @@ a:focus {
   *,
   *::before,
   *::after {
-    background: #fff !important;
-    color: #000 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
     /* Black prints faster */
     box-shadow: none !important;
     text-shadow: none !important;

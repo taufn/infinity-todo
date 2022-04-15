@@ -3,6 +3,7 @@
   padding: 1em;
   overflow: auto;
   border-radius: 0.25em;
+  background-color: #ffffff;
 }
 
 .expanded {

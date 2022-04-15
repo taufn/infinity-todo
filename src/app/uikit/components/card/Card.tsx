@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { UIColors, UIDepths } from "../../tokens";
+import { UIDepths } from "../../tokens";
 import styles from "./card.module.css";
 
 type CardProps = {
@@ -16,7 +16,6 @@ const Card: React.FC<CardProps> = ({ children, className, expanded, noSpace }) =
       className={classNames(
         styles.comp,
         { [styles.expanded]: expanded, [styles["no-space"]]: noSpace },
-        UIColors.bgWhite,
         UIDepths.shadowShallow,
         className,
       )}
